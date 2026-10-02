@@ -15,13 +15,20 @@ A super simple FastAPI application that allows students to view and sign up for 
    pip install fastapi uvicorn
    ```
 
-2. Run the application:
+2. Configure teacher accounts and a session signing secret. Keep these values out of source control. For local HTTP development, leave `COOKIE_SECURE` unset; set it to `true` when serving the app over HTTPS.
+
+   ```bash
+   export TEACHER_ACCOUNTS='{"teacher":"replace-with-a-strong-password"}'
+   export SESSION_SECRET="$(python -c 'import secrets; print(secrets.token_urlsafe(32))')"
+   ```
+
+3. Run the application:
 
    ```
-   python app.py
+   uvicorn app:app --app-dir src --reload
    ```
 
-3. Open your browser and go to:
+4. Open your browser and go to:
    - API documentation: http://localhost:8000/docs
    - Alternative documentation: http://localhost:8000/redoc
 
